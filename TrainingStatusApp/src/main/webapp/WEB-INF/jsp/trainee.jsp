@@ -218,7 +218,7 @@ nav li {
 				</form>
 			</li> &nbsp;
 			<li>
-				<form id="Back" align="right" method="POST" action="adminlogin">
+				<form id="Back" align="right" method="Get" action="logoutToTrainee">
 					<button type="login" class="btn btn btn-danger btn-m">Admin</button>
 				</form>
 			</li>
