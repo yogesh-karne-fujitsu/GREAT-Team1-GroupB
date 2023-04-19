@@ -8,13 +8,15 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.Spring.TrainingStatusApp.bean.Trainee;
 import com.Spring.TrainingStatusApp.dao.TraineeDao;
 import com.Spring.TrainingStatusApp.service.TraineeService;
 
-public class TraineeImpl implements TraineeService {
+@Service
+public class TraineeServiceImpl implements TraineeService {
 	
 	
 	private String currentDirectory = System.getProperty("user.dir");
