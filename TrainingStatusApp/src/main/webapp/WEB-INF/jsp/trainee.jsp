@@ -242,8 +242,17 @@ html {zoom: 100%;}
 
         <div align="right" class="btn3">
             <p align="left" class="logo">FUJITSU</p>
-            <button class="faq">FAQ</button>
-            <button class="empinfo">Emp Info</button>
+				<form id="faq" align="right" method="GET" action="faq"
+					target="_blank">
+					<button type="back" class="btn btn btn-success btn-m btn-block">FAQ</button>
+				</form>
+				<form id="emp" align="right" method="GET" action="employeeinfo"
+					target="_blank">
+					<button type="back" class="btn btn btn-info btn-m btn-block"">Emp_Info</button>
+				</form>
+            	<form id="logoutToTrainee" align="right" method="GET" action="logoutToTrainee">
+					<button type="login" class="btn btn btn-danger btn-m">Logout</button>
+				</form>
 
         </div>
         <h2>${successMsg}</h2>
