@@ -248,11 +248,17 @@ nav li {
 				</div>
 				<table style="width: 50%;" table table-hover";align="left">
 					<tr>
-						<td class="empid"><b>Employee ID</b><span class="text-dark">*</span></td>
-						<td class="empidInput"><form:input path="empId"
-								placeholder="Emp Id" /> <form:errors path="empId"
-								cssClass="error" /></td>
+						<td><label><b>Employee Id </b><span class="text-dark">*</span></label></td>
+						<td><input id="employeeId" list="employeeDataList" name="employeeId" 
+						placeholder="employee Id" required>
+							<datalist id="employeeDataList">
 
+							<c:forEach items="${employeeIdList}" var="employeeId">
+								<option value="${employeeIdList}">${employeeIdList}</option>
+							</c:forEach>
+
+						</datalist> </td>
+						
 
 						<td class="emailId"><b>Email ID</b><span class="text-dark">*</span></td>
 						<td class="emailIdInput"><form:input path="mailId"
@@ -263,8 +269,8 @@ nav li {
 					<tr>
 						<td class="empName"><b>Employee Name</b><span
 							class="text-dark">*</span></td>
-						<td class="empNameInput"><input type="text" name="empName"
-							placeholder="Name" required /></td>
+						<td><input name="employeeName" id="employeeName"
+							placeholder="Employee Name" required></td>
 						<br>
 						<td class="batch"><b>Batch</b><span class="text-dark">*</span></td>
 						<td style="padding-left: 30px"><select class="sel"
@@ -372,6 +378,25 @@ nav li {
 			context : document.body
 		}).done(function(data) {
 			document.getElementById("courseName").value = data;
+		});
+	});
+</script>
+<script type="text/javascript">
+	$('#employeeId').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("employeeId");
+
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("employeeName").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-name?employeeId=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("employeeName").value = data;
 		});
 	});
 </script>

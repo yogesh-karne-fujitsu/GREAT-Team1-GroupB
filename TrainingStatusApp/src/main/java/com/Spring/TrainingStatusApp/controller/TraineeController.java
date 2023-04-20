@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.Spring.TrainingStatusApp.bean.Trainee;
 import com.Spring.TrainingStatusApp.bean.TraineeLogin;
 import com.Spring.TrainingStatusApp.service.CourseService;
+import com.Spring.TrainingStatusApp.service.EmployeeService;
 import com.Spring.TrainingStatusApp.service.TraineeService;
 
 @Controller
@@ -32,9 +33,11 @@ public class TraineeController
 {
 	@Autowired
 	TraineeService TraineeService;
-	
 	@Autowired
 	CourseService courseService;
+	@Autowired
+	EmployeeService employeeService;
+	
 	
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
@@ -64,6 +67,7 @@ public class TraineeController
 	Trainee trainee = new Trainee();
 	model.addAttribute("trainee", trainee);
 	model.addAttribute("courseIdList",courseService.getAllCourseId());
+	model.addAttribute("employeeIdList",employeeService.getAllEmployeeId());
 	return "trainee";
 	} else {
     model.put("errorMsg","Please Provide correct credentials");
@@ -84,6 +88,7 @@ public class TraineeController
 		TraineeService.createNewTrainee(trainee, mailScrn, sabaScrn, testScrn);
 		model.put("successMsg", "Submitted Sucessfully..!");
 		model.addAttribute("courseIdList", courseService.getAllCourseId());
+		model.addAttribute("employeeIdList",employeeService.getAllEmployeeId());
 		return "trainee";
 	}	
 	
@@ -91,6 +96,11 @@ public class TraineeController
 	@ResponseBody
 	public String getAllCourseNameByCourseId(@RequestParam("courseId") String courseId) {
 		return courseService.getCourseNameByCourseId(courseId);
+	}
+	@RequestMapping(value = "/employee-name", method = RequestMethod.GET)
+	@ResponseBody
+	public String getAllEmployeeNameByEmployeeId(@RequestParam("employeeId") String employeeId) {
+		return employeeService.getEmployeeNameByEmployeeId(employeeId);
 	}
 	
 	

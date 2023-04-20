@@ -12,23 +12,24 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.Spring.TrainingStatusApp.dao.CourseDao;
+import com.Spring.TrainingStatusApp.dao.EmployeeDao;
 
 @Repository
-public class CourseDaoImpl extends JdbcDaoSupport implements CourseDao{
-	
+public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao {
+
 	@Autowired
 	DataSource dataSource;
 	
 	@PostConstruct
 	private void intialize() {
-		System.out.println("DAOimpl-course");
+		System.out.println("DAOimpl-employee");
 		setDataSource(dataSource);
 	}
-
+	
+	
 	@Override
-	public List<String> getAllCourseId() {
-		String sql="select course_id from tblcoursedetails";
+	public List<String> getAllEmployeeId() {
+		String sql="select emp_id from tblemployees";
 		
 		return getJdbcTemplate().query(sql,new RowMapper<String>(){
 			@Override
@@ -39,16 +40,17 @@ public class CourseDaoImpl extends JdbcDaoSupport implements CourseDao{
 	}
 
 	@Override
-	public String getCourseNameById(String courseId) {
-		String sql="select course_name, course_id from tblcoursedetails where course_id=? LIMIT 1";
+	public String getEmployeeNameById(String employeeId) {
+		String sql="select emp_name, emp_id from tblemployees where emp_id=? LIMIT 1";
 		
-		String courseName = getJdbcTemplate().queryForObject(sql, new String[]{courseId}, new RowMapper<String>() {
+		String employeeName = getJdbcTemplate().queryForObject(sql, new String[]{employeeId}, new RowMapper<String>() {
 			@Override
 			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString(1);
 			}
 		});
-		return courseName;
+		return employeeName;
 	}
+	
 
 }
