@@ -1,4 +1,4 @@
-package com.Spring.TrainingStatusApp.serviceimpl;
+package com.Spring.TrainingStatusApp.service.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.Spring.TrainingStatusApp.bean.Trainee;
 import com.Spring.TrainingStatusApp.dao.TraineeDao;
 import com.Spring.TrainingStatusApp.service.TraineeService;
+
 
 @Service
 public class TraineeServiceImpl implements TraineeService {
@@ -55,6 +57,32 @@ public class TraineeServiceImpl implements TraineeService {
 		private String getFileExtension(String fileName) {
 			int extensionStartIndex = fileName.lastIndexOf(".");
 			return fileName.substring(extensionStartIndex, fileName.length());
+		}
+
+		@Override
+		public List<Trainee> getTrainees(String batNm, String empID, String subDate, String approver) {
+
+			List<Trainee> trainee1 = traineeDao.getTrainees(batNm, empID, subDate, approver);
+			System.out.println("Return Service page->" + trainee1);
+			return trainee1;
+			
+		}
+
+		@Override
+		public int updateRecst(String eid, String cid, char st) throws IOException {
+			System.out.println("ServiceImple2");
+			traineeDao.updateRecSts(eid, cid, st);
+			System.out.println("ServiceImple3");
+			return 0;
+		}
+
+		@Override
+		public List<Trainee> getAllTrainees() {
+
+			System.out.println("To get the ALL user information");
+			List<Trainee> trainee1 = traineeDao.getAllTrainees();
+			System.out.println("Return Service page->" + trainee1);
+			return trainee1;
 		}
 
 }

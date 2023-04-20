@@ -1,13 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<html>
 
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trainee</title>
-    
+<meta charset="ISO-8859-1">
+<title>Trainee page</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<!-- <script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script> -->
+<!-- Popper JS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script LANGUAGE="JavaScript">
 <!--
 	function confirmSubmit() {
@@ -19,385 +32,365 @@
 	}
 // -->
 </script>
-    <style>
-        div {
-
-  height: auto;
-
-  width: auto;
-
+<style type="text/css">
+* {
+	font-family: serif;
+	font-size: 18px;
+	color: black;
 }
-        body {
-	background-color: rgb(245, 245, 245);
+
+body {
+	background-color: rgb(234, 232, 232);
 	background-repeat: no-repeat;
 	padding: 0%;
 }
-html {zoom: 100%;} 
-        }
-        /* -------------------------------- For topg--------------------- */
-        .topg{
-            margin-top: 1%;
-            margin-bottom: 1%;
-            margin-right: 5%;
-        }
 
-        .logo{
-            font-size: 40px;
-            float: left;
-            color: red;
-            margin-left: 4%;
-            
-        }
-        
-   
-        .admin{
-            background-color: rgb(200, 0, 0);
-            color: white;
-            border: none;
-            height: 36px;
-            width: 105px;
-            border-radius: 2px;
-            cursor: pointer;
-            margin-right: 1%;
-            margin-top: 1%;
-        }
-        .admin:hover, .submit:hover, .reset:hover, .faq:hover{
-            opacity: 0.7;
-        }
+.empid {
+	font-weight: bold;
+	padding-left: 190px;
+	align-content: center;
+}
 
-        .faq{
-            background-color: rgb(2, 158, 255);
-            color: white;
-            border: none;
-            height: 36px;
-            width: 74px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 15px;
-            margin-right: 1%;
-        }
+.empidInput {
+	padding-left: 30px;
+}
 
-        .empinfo{
-            background-color: white;
-            border-color: rgb(41, 118, 211);
-            border-style: solid;
-            border-width: 1px;
-            color: rgb(41, 118, 211);
-            height: 36px;
-            width: 112px;
-            border-radius: 2px;
-            margin-right: 5%;
-        }
-        .empinfo:hover{
-            background-color: rgb(41, 118, 211);
-            color: white;
-        }
+.emailId {
+	padding-left: 110px;
+}
 
-        /* -------------------------------- For trainee heading --------------------- */
-        .heading1 {
-            font-size: hard;
-            color: rgb(93, 129, 143);
-            display: block;
-            align-self: center;
-            padding-bottom: 2%;
-        }
-        /* -------------------------------- For emp info --------------------- */
-        .trninf {
-            color: rgb(5, 5, 5);
-            background-color: rgb(240, 255, 255);
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: large;
-            font-weight: bold;
-            margin-bottom: 2%;
-           
-        }
-        /* ------------------------------------------------------- */
-        .empid{
-        border-radius: 10px;
-        padding: 5px;
-        margin-bottom: 2%;
-        margin-left: 6%;
-        }
+.emailIdInput {
+	padding-left: 30px
+}
 
-       .empname{
-        border-radius: 10px;
-        padding: 5px;
-        margin-bottom: 2%;
-       }
+.empName {
+	padding-left: 190px;
+}
 
-       .empmailid{
-        border-radius: 10px;
-        padding: 5px;
-        margin-bottom: 2%;
+.empNameInput {
+	padding-left: 30px;
+}
 
-       }
-      
-       .empbatch{
-        border-radius: 15px;
-        padding: 5px;
-        margin-bottom: 2%;
-        margin-right: 16%;
-        margin-left: 1%;
-      
-       }
+.batch {
+	padding-left: 110px;
+}
 
-       /*-------------------------------- For course heading ---------------------   */
-        .heading2 {
-            font-size: hard;
-            color: rgb(93, 129, 143);
-            display: block;
-            align-self: center;
-            width: 105%
-            
-        }
-        /* ------------------------------------------------------- */
-        .crsinf{
-            color: rgb(5, 5, 5);
-            background-color: rgb(240, 255, 255);
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: large;
-            font-weight: bold;
-            margin-top: 2%;
-        }
+input {
+	background-color: white;
+	border: solid #DDDDDD;
+	color: black;
+	border-radius: 6px;
+}
 
-        /* ------------ In .dates ------------------ */
-        .trndate{
-            border-radius: 10px;
-            padding: 2px;
-            margin-right: 10%;
-        }
-        .strtdate{
-            border-radius: 10px;
-            padding: 2px;
-            margin-right: 10%;
-        }
-        .enddate{
-            border-radius: 10px;
-        }
+select {
+	background-color: white;
+	border-radius: 6px;
+	border: solid #DDDDDD;
+	color: black;
+}
 
-        /* ------------ In .courseid ------------------ */
-        .crsid{
-            border-radius: 10px;
-            padding: 2px;
-           margin-left: 5%; 
-        }
-        .crsname{
-            border-radius: 10px;
-            padding: 2px;
-            margin-left: 3%;
-        }
+.app {
+	margin-left: 18px;
+	color: black;
+}
 
-        /* ------------ In .appro ------------------ */
+.card {
+	height: 850px;
+	padding-left: 20px;
+	background-color: rgb(234, 232, 232);
+	background-repeat: no-repeat;
+	box-shadow: 5px 5px 5px 5px grey;
+	background-size: 115% 115%, 20% 20%;
+	width: 1250px;
+	margin: auto;
+}
 
-        .tstscr{
-            border-radius: 10px;
-            padding: 2px;
-           
-        }
+*option {
+	background-color: green;
+	color: black;
+}
 
-        .approver{
-            border-radius: 10px;
-            padding: 2px;
-        }
+#emp {
+	padding-right: 1.4%;
+}
 
-        /* ------------ In .appro ------------------ */
-        .butn{
-            background-color: rgb(240, 255, 255);
-            margin-bottom: 2%;
-        }
+#Back {
+	padding-left: %;
+}
+</style>
+<style>
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: rgba(52, 58, 64, 255);
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+	background-image:
+		url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Fujitsu-Logo.svg/2560px-Fujitsu-Logo.svg.png);
+	background-repeat: no-repeat;
+	background-size: 40% 10%;
+	background-position-x: 20px;
+	background-position-y: 10px;
+}
 
-        .submit{
-            background-color: green;
-            color: white;
-            border: none;
-            height: 36px;
-            width: 105px;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-right: 13%;
-        }
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+	color: rgb(255, 0, 0);
+}
 
-        .reset{
-            background-color: orange;
-            color: white;
-            border: none;
-            height: 36px;
-            width: 105px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        /* ------------ In .appro ------------------ */
+#main {
+	transition: margin-left .5s;
+	padding: 16px;
+}
 
-        
-    </style>
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
+	#submit {
+		background: rgb(169, 173, 169);
+		color: black;
+		margin-left: 15em;
+		width: 160px;
+		font-size: 20px;
+	}
+	#submit:hover {
+		background-color: rgb(15, 39, 99);
+		color: white;
+	}
+}
+</style>
 
+<style>
+.error {
+	color: red
+}
+
+nav {
+	width: 100%;
+	height: 75px;
+	line-height: 75px;
+	padding: 0px 50px;
+	background-image: linear-gradient(#033747, #012733);
+}
+
+nav .logo p {
+	font-size: 40px;
+	float: left;
+	color: red;
+}
+
+nav ul {
+	float: right;
+	%;
+}
+
+nav li {
+	display: inline-block;
+	list-style: none;
+}
+</style>
 
 </head>
 
 <body>
 
-	
+	<nav>
+		<div class="logo">
+			<p>Fujitsu</p>
+		</div>
+		<ul>
 
-    <div class="topg" >
-
-        <div align="right" class="btn3">
-            <p align="left" class="logo">FUJITSU</p>
-				<form id="faq" align="right" method="GET" action="faq"
-					target="_blank">
-					<button type="back" class="btn btn btn-success btn-m btn-block">FAQ</button>
-				</form>
+			<li>
 				<form id="emp" align="right" method="GET" action="employeeinfo"
 					target="_blank">
 					<button type="back" class="btn btn btn-info btn-m btn-block"">Emp_Info</button>
 				</form>
-            	<form id="logoutToTrainee" align="right" method="GET" action="logoutToTrainee">
+			</li> &nbsp;
+			<li>
+				<form id="faq" align="right" method="GET" action="faq"
+					target="_blank">
+					<button type="back" class="btn btn btn-success btn-m btn-block">FAQ</button>
+				</form>
+			</li> &nbsp;
+			<li>
+				<form id="Back" align="right" method="POST" action="adminlogin">
 					<button type="login" class="btn btn btn-danger btn-m">Logout</button>
 				</form>
-
-        </div>
-        <h2>${successMsg}</h2>
-
-    </div>
-
-<form method="post" action ="welcome" modelAttribute="user" enctype="multipart/form-data">
-
-    <div align="center" class="heading1" style="margin-right:130px;">
-        <h2 align="center" class="card-header"><b>Trainee Info:</b></h2>
-    </div>
-
-        <div align="center" class="trninf">
-            <table style="width: 80%;">
-
-            <tr>
-            <td><label for="empid">Employee ID<span class="text-dark">*</span> :</label>
-            <input type="text" name="empId"  class="empid" placeholder="Enter Your ID"></td>
-
-            <td align="center"><label for="empname">Employee Name<span class="text-dark">*</span> :</label>
-            <input type="text" name="empName"  class="empname" placeholder="Enter Your Name"></td></tr>
-
-            <br>
-
-            <tr><td><label for="empmailid">Employee Mail ID<span class="text-dark">*</span> :</label>
-            <input type="mail" name="mailId"  class="empmailid" placeholder="Enter Your Mail Id"></td>
-
-            <td align="center"><label for="empbatch">Employee Batch<span class="text-dark">*</span> :</label>
-            <select class="empbatch" name="batch" id="empbatch" style="width: 120px; text-align: center;">
-                <option>January</option>
-                <option>February</option>
-                <option>March</option>
-                <option>April</option>
-                <option>May</option>
-                <option>June</option>
-                <option>July</option>
-                <option>August</option>
-                <option>September</option>
-                <option>October</option>
-                <option>November</option>
-                <option>December</option>
-            </select></td></tr>
-        </table>
-        </div>
-    
-
-    <div align="center" class="heading2">
-        <h2 align="center" class="card-header"><b>Course Details:</b></h2>
-    </div>
-
-        <div align="center" class="crsinf">
-<br>
-            <div class="dates">
-             <table style="width: 80%;">
-             <tr>
-                <td align="left"><label for="trndate">Training Date :</label>
-                <input type="date" name="trainDate"  class="trndate" placeholder="Select Date"">
-
-                <td align="left"><label for="strtdate">Start Date :</label>
-                <input type="date" name="srDate" class="strtdate" placeholder="Select Date"style="margin-right:-95px;">
-
-                <td align="center"><label for="enddate">End Date :</label>
-                <input type="date" name="enDate" class="enddate" placeholder="Select Date">
-                </tr>
-                  </table>
-            </div>
-<br>
-            <div class="courseid">
-                <table style="width: 80%;">
-                <tr>
-                <td align="left"><label for="crsid">Course ID :</label>
-                <input type="text" name="courseId" class="crsid" placeholder="Course id" id="crsid">
-                </td>
-                 
-                <td align="left"><label for="crsname">Course Name :</label>
-                <input type="text" name="courseName" class="crsname" placeholder="Course Name"style="margin-right:110px;"></td></tr>
-                </table>
-            </div>
- <br>           
-            <div class="ss">
-              <table style="width: 80%;">
-              <tr>
-                <td align="left"><label for="emailss" >Email Screenshot :</label>
-                <input type="file" id="fileName" name="emSrn"  class="emailss" name="emailss" accept=".jpg,.jpeg,.png" onchange="validateFileType()"> </td>
-                
- </tr>
-                  </table>
- 
-            </div>
-  <br>
-    <div class="ss">
-              <table style="width: 80%;">
-              <tr>
-  <td align="left"><label for="sabass">Saba Screenshot :</label>
-                <input type="file" id="fileName" class="sabass" name="sabaSrn" accept=".jpg,.jpeg,.png" onchange="validateFileType()"> </td>
-              </tr>
-                </table>
-                 </div>       
- <br>
-    <div class="ss">
-              <table style="width: 80%;">
-              <tr>
-             <td align="left"><label for="testscrss">Test Score Screenshot :</label>
-
-                <input type="file" id="fileName" class="testscrss" name="testScrn" accept=".jpg,.jpeg,.png" onchange="validateFileType()"></td>
-                <td align="left" ><label for="tstscr" >Test Score :</label >
-                    <input type="text" name="testScore" class="tstscr" placeholder="Enter Your Score" style="margin-right:455px;"></td>
-                </tr>
-                </table>
-      </div>           
-<br>
-
-<div class="appro">  
-                <table style="width: 80%;">     
-                    <tr>  
-                    
-
-                    <td align="left"><label for="approver">Approver Name:</label>
-                    <select name="apName" id="approver" class="approver">
-                    <option>Anandhan</option>
-                    <option>Vishnu</option>
-                    </td>
-                </tr>
-                </table>
-            </div>
-        </div>
-    
-
-<div class="butn" align="center">
+			</li>
+		</ul>
 
 
-<br>
-<br>
-<button type="submit" value='Submit' name='Submit'
- class="btn btn-success" onClick='return confirmSubmit()'>Submit</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button type="reset"  class="btn btn-warning">Clear</button>
+	</nav>
+	<br>
+	<h4 style="color: red">${successMsg}</h4>
+	<br>
 
-<br>
-<br>
-<br>
 
-</div>
+	<form:form method="post" modelAttribute="trainee"
+		enctype="multipart/form-data">
+		<div class="card">
+			<div align="left">
+				<div align="left">
+					<h2 class="card-header"">Trainee Info:</h2>
+				</div>
+				<table style="width: 50%;" table table-hover";align="left">
+					<tr>
+						<td class="empid"><b>Employee ID</b><span class="text-dark">*</span></td>
+						<td class="empidInput"><form:input path="empId"
+								placeholder="Emp Id" /> <form:errors path="empId"
+								cssClass="error" /></td>
 
-</form>
+
+						<td class="emailId"><b>Email ID</b><span class="text-dark">*</span></td>
+						<td class="emailIdInput"><form:input path="mailId"
+								placeholder="username@fujitsu.com" required='true' /> <form:errors
+								path="mailId" cssClass="error" /></td>
+					</tr>
+
+					<tr>
+						<td class="empName"><b>Employee Name</b><span
+							class="text-dark">*</span></td>
+						<td class="empNameInput"><input type="text" name="empName"
+							placeholder="Name" required /></td>
+						<br>
+						<td class="batch"><b>Batch</b><span class="text-dark">*</span></td>
+						<td style="padding-left: 30px"><select class="sel"
+							name="batch" required>
+								<option value="" selected="selected">Select Batch</option>
+								<option>January</option>
+								<option>February</option>
+								<option>March</option>
+								<option>April</option>
+								<option>May</option>
+								<option>June</option>
+								<option>July</option>
+								<option>August</option>
+								<option>September</option>
+								<option>October</option>
+								<option>November</option>
+								<option>December</option>
+
+						</select></td>
+				</table>
+				<br>
+				<div align="left">
+					<h2 class="card-header">Course Details:</h2>
+				</div>
+				<table style="width: 50%;" class="table table-hover">
+					<tr>
+						<td><b>Training Date</b><span class="text-dark">*</span></td>
+						<td><input type="Date" name="trainDate" value="" required /></td>
+						<td><b>Start date</b><span class="text-dark">*</span></td>
+						<td><input type="Date" name="srDate" value="" required />
+						<td>
+						<td><b>End date</b><span class="text-dark">*</span></td>
+						<td><input type="Date" name="enDate" value="" required /></td>
+					</tr>
+					<tr>
+						<td><label><b>Course Id </b><span class="text-dark">*</span></label></td>
+						<td><input id="courseId" list="courseDataList" name="courseId"
+							placeholder="Course Id" required><datalist id="courseDataList">
+
+							<c:forEach items="${courseIdList}" var="courseId">
+								<option value="${courseId}">${courseId}</option>
+							</c:forEach>
+
+						</datalist> </td>
+
+						<td><label><b>Course Name</b><span class="text-dark">*</span></label></td>
+						<td><input name="courseName" id="courseName"
+							placeholder="Course Name" required></td>
+					
+					</tr>
+					<tr>
+						<td><b>Email Screenshot</b><span class="text-dark">*</span></td>
+						<td><input type="file" id="fileName" name="emSrn"
+							accept=".jpg,.jpeg,.png" onchange="validateFileType()" required /></td>
+
+					</tr>
+					<tr>
+						<td><b>Saba Screenshot</b><span class="text-dark">*</span></td>
+						<td><input type="file" id="fileName" name="sabaSrn"
+							accept=".jpg,.jpeg,.png" onchange="validateFileType()" required /></td>
+					</tr>
+					<tr>
+						<td><b>Test-Score Screenshot</b></td>
+						<td><input type="file" id="fileName" name="testScrn"
+							accept=".jpg,.jpeg,.png" onchange="validateFileType()" /></td>
+						<td><b>Test Score</b></td>
+						<td><input type="text" name="testScore" value=""
+							placeholder="Score" /> <form:errors path="testScore"
+								cssClass="error" /></td>
+					</tr>
+				</table>
+				<table class="app">
+					<tr>
+						<td><b>Approver Name</b><span class="text-dark">*</span></td>
+						<td><select name="apName" required>
+								<option value="" selected="selected">Select</option>
+								<option>Anandhan</option>
+								<option>Vishnu</option>
+						</select></td>
+
+						<td>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button type="submit" value='Submit' name='Submit'
+								class="btn btn-danger btn-m" onClick='return confirmSubmit()'>Submit</button>
+						</td>
+					</tr>
+				</table>
+	</form:form>
+
 </body>
+
+<script type="text/javascript">
+	$('#courseId').change(function() {
+		console.log("Inside");
+		var courseIdField = document.getElementById("courseId");
+
+		if( courseIdField.value == null || courseIdField.value == "") {
+			alert("Select appropriate course id")
+			document.getElementById("courseName").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "course-name?courseId=" + courseIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("courseName").value = data;
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	function validateFileType() {
+		var fileName = document.getElementById("fileName").value;
+		var idxDot = fileName.lastIndexOf(".") + 1;
+		var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+		if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+			//TO DO
+		} else {
+			alert("Only jpg/jpeg and png files are allowed!");
+		}
+	}
+</script>
+
+
+
+
 
 </html>
