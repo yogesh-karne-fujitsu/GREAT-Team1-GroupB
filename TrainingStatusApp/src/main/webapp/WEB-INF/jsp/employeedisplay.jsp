@@ -5,6 +5,13 @@
 
 <html>
 <head>
+<script type="text/javascript">
+  <!--
+      function getValue() {
+      var retVal = prompt("Enter your Reason for rejection : ", "Type here");
+            }
+         //-->
+ </script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -92,14 +99,8 @@ tr, center5 { <
 }
 
 body {
-	background-color: rgb(234, 232, 232);
+	background-color: rgb(245, 245, 245);
 	padding: 3%;
-	background: url(https://cdn.dribbble.com/users/3419046/screenshots/15428526/fujitsu-800_600.gif);
-    background-color: rgb(234, 232, 232); 
-    background-size: 180px 100px;
-    background-position:  right top;
-    background-repeat: no-repeat;
-    padding: 2%;  
 }
 
 }
@@ -199,9 +200,9 @@ to {
 }
 </style>
 <body class="container-fluid">
-<form id="Back" align="left" method="GET" action="Back">
+<form id="Back" align="left" method="GET" action="Backtoemployeeinfo">
  		<button type="Back" class="btn btn btn-info btn-m">Back</button>
-  	</form>
+  </form>
 	<h2 class="card-header" style="background-color: D3d3d3">Trainee
 		Records</h2>
 	<table class="table table-hover"
@@ -209,9 +210,7 @@ to {
 		<br>
 		<tr>
 			<center1>
-			<td><label><b>APPROVER NAME :</b> </label> ${verifyname}</td>
 			<td><label><b>SUBMIT DATE :</b></label> ${verDate}</td>
-			<td><label><b>BATCH NAME :</b></label> ${empBatch}</td>
 			<td><label><b>EMPLOYEE ID :</b></label> ${empId}</td>
 			</center1>
 
@@ -228,11 +227,10 @@ to {
 			<td style=" text-align:center"><b><label>COURSE NAME</label></b></td>
 			<td style=" text-align:center"><b><label>SUBMITTED DATE</label></b></td>
 			<td style=" text-align:center"><label><b>APPROVER NAME</b></label></td>
-			<td style=" text-align:center"><label><b>TEST SCORE</b></label></td>
 			<td style=" text-align:center"><label><b>SABA SCREENSHOT</b></label></td>
 			<td style=" text-align:center"><label><b>MAIL SCREENSHOT</b></label></td>
 			<td style=" text-align:center"><label><b>TEST SCREENSHOT</b></label></td>
-				
+			<td style=" text-align:center"><label><b>Status</b></label></td>
 		</tr>
 
 		<c:forEach items="${usersList}" var="user">
@@ -256,13 +254,11 @@ to {
 					<td><c:out value="${user.mailId}" /></td>
 					<td7>
 					<input type="hidden" id="csId" name="csId" value="${user.courseId}" /></td7>
-					<td8>
-					<input type="hidden" id="testscore" name="testScore" value="${user.testScore}" /></td8>
 					<td><c:out value="${user.courseId}" /></td>
 					<td><c:out value="${user.courseName}" /></td>
 					<td><c:out value="${user.trainDate}" /></td>
 					<td><c:out value="${user.apName}" /></td>
-					<td><c:out value="${user.testScore}" /></td>
+					
 
 					<td><img class="ImgThumbnail" src="${user.sImg}"
 						style="width: 100%; max-width: 300px"></td>
@@ -270,18 +266,11 @@ to {
 						style="width: 100%; max-width: 300px"></td>
 					<td><img class="ImgThumbnail" src="${user.tsImg}" alt="test"
 						style="width: 100%; max-width: 300px"></td>
-						
-					<td>
-						<button type="submit" class="btn btn-outline-success" value="A"
-							name="status">APPROVE</button>
-					</td>
-					<td>
-						<button class="btn btn-outline-danger" value="R" name="status">REJECT</button>
-					</td>
+						<td><c:out value="${user.status}" /></td>
+					
 					<div class="modal">
 						<span class="close">&times;</span> <img class="modalImage"
 							id="img01">
-
 					</div>
 					</center5>
 				</tr>
