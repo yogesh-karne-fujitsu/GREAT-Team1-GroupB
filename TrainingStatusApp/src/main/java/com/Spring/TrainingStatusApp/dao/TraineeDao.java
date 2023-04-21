@@ -3,7 +3,7 @@ package com.Spring.TrainingStatusApp.dao;
 import java.io.IOException;
 import java.util.List;
 
-import com.Spring.TrainingStatusApp.bean.Trainee;
+import com.Spring.TrainingStatusApp.controller.bean.Trainee;
 
 
 public interface TraineeDao {
@@ -14,7 +14,7 @@ public interface TraineeDao {
 	
 	int updateRecSts(String emid,String courseId,char rStat) throws IOException;
 	
-    List<Trainee> getAllTrainees();
+	 List<Trainee> getTrainees(String emID,String sbDate);
     
 
 }

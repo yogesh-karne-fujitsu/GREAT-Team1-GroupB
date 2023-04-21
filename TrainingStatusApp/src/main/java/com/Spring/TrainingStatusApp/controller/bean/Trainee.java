@@ -1,4 +1,4 @@
-package com.Spring.TrainingStatusApp.bean;
+package com.Spring.TrainingStatusApp.controller.bean;
 
 public class Trainee {
 	private String empId;

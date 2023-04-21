@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.Spring.TrainingStatusApp.bean.Trainee;
+import com.Spring.TrainingStatusApp.controller.bean.Trainee;
 import com.Spring.TrainingStatusApp.dao.TraineeDao;
 
 
@@ -143,45 +143,45 @@ public class TraineeDaoImpl extends JdbcDaoSupport implements TraineeDao {
 	}
 
 	@Override
-	public List<Trainee> getAllTrainees() {
-			String sql="select * from tblmaster";
-		
+	public List<Trainee> getTrainees(String emID, String sbDate) {
+		String sql="select * from tblmaster where (rec_status='R' or rec_status='U') and ";
+		if(sbDate != null)
+		{
+			sql+=" tr_date='"+sbDate+"'";
+		}
+		if(emID != null && emID.trim().length() != 0)
+		{
+			sql+=" and emp_id='"+emID+"'";
+				
+		}
+		System.out.println("SQL QUERY -->"+sql);
 		return getJdbcTemplate().query(sql,new RowMapper<Trainee>(){
 			@Override
 			public Trainee mapRow(ResultSet rs,int rownum) throws SQLException{
 				Trainee trainee=new Trainee();
 				System.out.println("Inside return");
-				trainee.setEmpId(rs.getString(2));
+				trainee.setEmpName(rs.getString(2));
 				trainee.setMailId(rs.getString(3));
-				trainee.setEmpName(rs.getString(4));
+				trainee.setEmpId(rs.getString(4));				
 				trainee.setBatch(rs.getString(5));
-				trainee.setTrainDate(rs.getString(6));
-				trainee.setSrDate(rs.getString(7));
-				trainee.setEnDate(rs.getString(8));
-				trainee.setCourseId(rs.getString(9));
-				trainee.setCourseName(rs.getString(10));
-				trainee.setApName(rs.getString(11));
+				trainee.setApName(rs.getString(6));
+				trainee.setCourseId(rs.getString(7));
+				trainee.setCourseName(rs.getString(8));
+				trainee.setSrDate(rs.getString(9));
+				trainee.setEnDate(rs.getString(10));
+				trainee.setTrainDate(rs.getString(11));
 				trainee.setsImg(rs.getString(12));
 				trainee.setSbImg(rs.getString(13));
 				trainee.setTsImg(rs.getString(14));
-				trainee.setStatus(rs.getString(15));
-				trainee.setTestScore(rs.getString(16));
+				trainee.setTestScore(rs.getString(15));
+				trainee.setStatus(rs.getString(16));
 				
 				
-				
-			
 				System.out.println("DAO RETURN - "+trainee);
 
-		return trainee;
+				return trainee;
 			}
-			
 		});
-
-}
-	
-
-
-
-
-
-}
+		
+	}}
+		

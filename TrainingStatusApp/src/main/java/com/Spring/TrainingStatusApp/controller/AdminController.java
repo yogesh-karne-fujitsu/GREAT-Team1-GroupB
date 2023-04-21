@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.Spring.TrainingStatusApp.bean.AdminLogin;
-import com.Spring.TrainingStatusApp.bean.Trainee;
+import com.Spring.TrainingStatusApp.controller.bean.AdminLogin;
+import com.Spring.TrainingStatusApp.controller.bean.Trainee;
 import com.Spring.TrainingStatusApp.service.CourseService;
 import com.Spring.TrainingStatusApp.service.TraineeService;
 

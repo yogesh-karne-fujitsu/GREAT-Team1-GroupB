@@ -3,27 +3,27 @@ package com.Spring.TrainingStatusApp.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.Spring.TrainingStatusApp.bean.Trainee;
-import com.Spring.TrainingStatusApp.bean.TraineeLogin;
+import com.Spring.TrainingStatusApp.controller.bean.Trainee;
+import com.Spring.TrainingStatusApp.controller.bean.TraineeLogin;
 import com.Spring.TrainingStatusApp.service.CourseService;
 import com.Spring.TrainingStatusApp.service.EmployeeService;
 import com.Spring.TrainingStatusApp.service.TraineeService;
@@ -113,5 +113,36 @@ public class TraineeController
 	public String faq() {
 		System.out.println("FAQ Page");
 		return "FAQ";
+	}
+	@RequestMapping(value = "/employeeinfo", method = RequestMethod.GET)
+	public String empinfo() {
+		System.out.println("employeeinfo Page");
+		return "employeeinfo";
+		}
+
+	@RequestMapping(value = "/rejectcourse", method = RequestMethod.POST)
+	// public String adminUser(ModelMap model,@RequestParam String
+	// batName,@RequestParam String empID,@RequestParam String subDate) throws
+	// IOException {
+	public String empolyeedataUser(HttpServletRequest req, ModelMap model) throws IOException {
+
+		String empID = req.getParameter("empID");
+		String subDate = req.getParameter("subDate");
+
+		List<Trainee> traineesList = TraineeService.getTrainees(empID, subDate);
+
+		System.out.println("List- " + traineesList);
+		model.put("usersList", traineesList);
+		model.put("verDate", subDate);
+		model.put("empId", empID);
+
+		// model.put("successMsg","Return from response page");
+		return "employeedisplay";
+	}
+	
+	@RequestMapping(value = "/Backtoemployeeinfo", method = RequestMethod.GET)
+	public String backtoempinfo() {
+		System.out.println("employeeinfo Page");
+		return "employeeinfo";
 	}
 }

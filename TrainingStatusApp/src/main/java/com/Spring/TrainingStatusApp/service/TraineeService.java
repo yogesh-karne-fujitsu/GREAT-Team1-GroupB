@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.Spring.TrainingStatusApp.bean.Trainee;
+import com.Spring.TrainingStatusApp.controller.bean.Trainee;
 
 
 public interface TraineeService {
@@ -16,7 +16,7 @@ public interface TraineeService {
 	
 	int updateRecst(String eid,String cid,char st) throws IOException;
 
-	List<Trainee> getAllTrainees();
+	List<Trainee> getTrainees(String empID,String subDate);
 
 
 }

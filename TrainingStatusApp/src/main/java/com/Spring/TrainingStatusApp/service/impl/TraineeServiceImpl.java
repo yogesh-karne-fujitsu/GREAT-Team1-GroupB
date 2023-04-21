@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.Spring.TrainingStatusApp.bean.Trainee;
+import com.Spring.TrainingStatusApp.controller.bean.Trainee;
 import com.Spring.TrainingStatusApp.dao.TraineeDao;
 import com.Spring.TrainingStatusApp.service.TraineeService;
 
@@ -76,13 +76,15 @@ public class TraineeServiceImpl implements TraineeService {
 			return 0;
 		}
 
-		@Override
-		public List<Trainee> getAllTrainees() {
 
-			System.out.println("To get the ALL user information");
-			List<Trainee> trainee1 = traineeDao.getAllTrainees();
-			System.out.println("Return Service page->" + trainee1);
-			return trainee1;
+		@Override
+		public List<Trainee> getTrainees(String empID, String subDate) {
+			List<Trainee> trainee2 = traineeDao.getTrainees(empID, subDate);
+			System.out.println("Return Service page->" + trainee2);
+			return trainee2;
 		}
+
+
+
 
 }

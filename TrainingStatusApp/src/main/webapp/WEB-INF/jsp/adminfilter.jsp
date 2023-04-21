@@ -1,4 +1,10 @@
+ <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -59,14 +65,45 @@ font-weight: 700;
  <form class="form" align="right" name="form1" method="post" action="response">
   <table class="table table-hover">
   <tr>
-  <td>Approver Name<span class="text-dark">*</span>:</td>
-  <td>
- <select name="approver">
- <option value="" selected="selected">Select</option>
- <option>Anandhan</option>
- <option>Vishnu</option>
- </select>
- </td>
+ <td><b>Approver Name:</b></td>
+               <td><input list="apName" name="approver" placeholder="Approver Name ">
+               <datalist id="apName">
+ <%
+				try{
+					//Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/trainingstatusapp_db","root","welcome@123");
+					Statement stat= con.createStatement();
+					String query="select approver_name from tblapprovers";
+				
+					ResultSet rel=stat.executeQuery(query);
+			
+					while(rel.next())
+					{
+						String apName= ""+rel.getString("approver_name");
+				
+					
+						System.out.println(apName);
+						
+			%>
+					<option value="<%=apName%>"> <%=apName%></option>
+					
+			<%
+					}
+					con.close();					
+				}
+				catch(Exception e)
+				{
+					
+				}
+
+			%>
+	</datalist>
+			
+			<% String val=request.getParameter("apName"); 
+				System.out.println(val);
+				
+				%>
+            </td>
  <td>Batch Name :</td>
   <td>
  <select name="batName">
@@ -88,7 +125,46 @@ font-weight: 700;
   </tr>
   <tr>
   <td>Employee ID :</td>
-  <td><input list="empId" name="empID" placeholder="Employee Id"></td>
+   <td><input list="empId" name="empID" placeholder="Employee Id">
+               <datalist id="empId">
+ <%
+				try{
+					//Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/trainingstatusapp_db","root","welcome@123");
+					Statement stat= con.createStatement();
+					String query="select distinct emp_id from tblmaster";
+				
+					ResultSet rel=stat.executeQuery(query);
+			
+					while(rel.next())
+					{
+						String empId= ""+rel.getString("emp_id");
+				
+						
+			
+					
+						System.out.println(empId);
+						
+			%>
+					<option value="<%=empId%>"> <%=empId%></option>
+					
+			<%
+					}
+					con.close();					
+				}
+				catch(Exception e)
+				{
+					
+				}
+
+			%>
+	</datalist>
+			
+			<% String val1=request.getParameter("empId"); 
+				System.out.println(val1);
+				
+				%>
+            </td>
    <td>Submit Date<span class="text-dark">*</span> :</td>
    <td>
    <input type="date" name="subDate" required>

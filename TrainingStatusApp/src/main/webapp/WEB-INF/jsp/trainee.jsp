@@ -226,7 +226,7 @@ nav li {
 				</form>
 			</li> &nbsp;
 			<li>
-				<form id="Back" align="right" method="POST" action="adminlogin">
+				<form id="Back" align="right" method="GET" action="logoutToTrainee">
 					<button type="login" class="btn btn btn-danger btn-m">Logout</button>
 				</form>
 			</li>
@@ -239,7 +239,7 @@ nav li {
 	<br>
 
 
-	<form:form method="post" modelAttribute="trainee"
+	<form:form method="post" action ="trainee" modelAttribute="trainee"
 		enctype="multipart/form-data">
 		<div class="card">
 			<div align="left">
@@ -248,28 +248,27 @@ nav li {
 				</div>
 				<table style="width: 50%;" table table-hover";align="left">
 					<tr>
-						<td><label><b>Employee Id </b><span class="text-dark">*</span></label></td>
-						<td><input id="employeeId" list="employeeDataList" name="employeeId" 
+						<td class="empid"><b>Employee ID</b><span class="text-dark">*</span></td>
+						<td><input id="employeeId" list="employeeDataList" name="empId" 
 						placeholder="employee Id" required>
 							<datalist id="employeeDataList">
 
 							<c:forEach items="${employeeIdList}" var="employeeId">
-								<option value="${employeeIdList}">${employeeIdList}</option>
+								
 							</c:forEach>
 
 						</datalist> </td>
 						
 
 						<td class="emailId"><b>Email ID</b><span class="text-dark">*</span></td>
-						<td class="emailIdInput"><form:input path="mailId"
-								placeholder="username@fujitsu.com" required='true' /> <form:errors
-								path="mailId" cssClass="error" /></td>
+						<td><input name="mailId" id="maillName"
+							placeholder="mail Name" required></td>
 					</tr>
 
 					<tr>
 						<td class="empName"><b>Employee Name</b><span
 							class="text-dark">*</span></td>
-						<td><input name="employeeName" id="employeeName"
+						<td><input name="empName" id="employeeName"
 							placeholder="Employee Name" required></td>
 						<br>
 						<td class="batch"><b>Batch</b><span class="text-dark">*</span></td>
@@ -345,13 +344,44 @@ nav li {
 				<table class="app">
 					<tr>
 						<td><b>Approver Name</b><span class="text-dark">*</span></td>
-						<td><select name="apName" required>
-								<option value="" selected="selected">Select</option>
-								<option>Anandhan</option>
-								<option>Vishnu</option>
-						</select></td>
+						 <td><input list="apName" name="apName" placeholder="Approver Name ">
+               <datalist id="apName">
+ <%
+				try{
+					//Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/trainingstatusapp_db","root","welcome@123");
+					Statement stat= con.createStatement();
+					String query="select approver_name from tblapprovers";
+				
+					ResultSet rel=stat.executeQuery(query);
+			
+					while(rel.next())
+					{
+						String apName= ""+rel.getString("approver_name");
+				
+					
+						System.out.println(apName);
+						
+			%>
+					<option value="<%=apName%>"> <%=apName%></option>
+					
+			<%
+					}
+					con.close();					
+				}
+				catch(Exception e)
+				{
+					
+				}
 
-						<td>
+			%>
+	</datalist>
+			
+			<% String val=request.getParameter("apName"); 
+				System.out.println(val);
+				
+				%>
+            </td>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button type="submit" value='Submit' name='Submit'
 								class="btn btn-danger btn-m" onClick='return confirmSubmit()'>Submit</button>

@@ -1,10 +1,11 @@
-package com.Spring.TrainingStatusApp.bean;
+package com.Spring.TrainingStatusApp.controller.bean;
 
 public class Employee {
 
 	private String empName;
 	private String empId;
 	private String mailId;
+	private String batch;
 
 	public String getEmpName() {
 		return empName;
@@ -30,7 +31,7 @@ public class Employee {
 	public void setBatch(String batch) {
 		this.batch = batch;
 	}
-	private String batch;
+	
 	@Override
 	public String toString() {
 		return "Employee [empName=" + empName + ", empId=" + empId + ", mailId=" + mailId + ", batch=" + batch + "]";
