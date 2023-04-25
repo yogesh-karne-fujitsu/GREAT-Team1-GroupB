@@ -102,6 +102,16 @@ public class TraineeController
 	public String getAllEmployeeNameByEmployeeId(@RequestParam("employeeId") String employeeId) {
 		return employeeService.getEmployeeNameByEmployeeId(employeeId);
 	}
+	@RequestMapping(value = "/employee-mail", method = RequestMethod.GET)
+	@ResponseBody
+	public String getAllEmployeeMailByEmployeeId(@RequestParam("employeeId") String employeeId) {
+		return employeeService.getEmployeeMailByEmployeeId(employeeId);
+	}
+	@RequestMapping(value = "/employee-batch", method = RequestMethod.GET)
+	@ResponseBody
+	public String getAllEmployeeBatchByEmployeeId(@RequestParam("employeeId") String employeeId) {
+		return employeeService.getEmployeeBatchByEmployeeId(employeeId);
+	}
 	
 	
 	@RequestMapping(value = "/logoutToTrainee", method = RequestMethod.GET)

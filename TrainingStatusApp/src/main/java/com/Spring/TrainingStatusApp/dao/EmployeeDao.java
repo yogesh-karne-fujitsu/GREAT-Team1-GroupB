@@ -8,4 +8,7 @@ public interface EmployeeDao {
 
 	String getEmployeeNameById( String employeeId);
 
+	String getEmployeeMailById( String mailId);
+	
+	String getEmployeeBatchById( String batch);
 }
