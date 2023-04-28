@@ -283,7 +283,7 @@ nav li {
 				<table style="width: 50%;" class="table table-hover">
 					<tr>
 						<td><b>Training Date</b><span class="text-dark">*</span></td>
-						<td><input type="Date" name="trainDate" value="" required /></td>
+						<td><input type="Date" name="trainDate" id="trdate" value="" required /></td>
 						<td><b>Start date</b><span class="text-dark">*</span></td>
 						<td><input type="Date" name="srDate" value="" required />
 						<td>
@@ -377,7 +377,25 @@ nav li {
 	</form:form>
 
 </body>
+<script type="text/javascript">
+	$('#employeeId').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("employeeId");
 
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("batch").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-batch?employeeId=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("batch").value = data;
+		});
+	});
+</script>
 <script type="text/javascript">
 	$('#courseId').change(function() {
 		console.log("Inside");
@@ -454,6 +472,7 @@ nav li {
 		});
 	});
 </script>
+
 
 <script type="text/javascript">
 	function validateFileType() {
