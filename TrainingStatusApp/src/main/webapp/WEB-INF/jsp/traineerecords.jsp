@@ -289,7 +289,7 @@ to {
 		            <input type="hidden" name="mailId" value="${user.mailId}" />
 		            <input type="hidden" name="courseId" value="${user.courseId}" />
 		            <input type="hidden" name="courseName" value="${user.courseName}" />
-		            <input name="description" id="description">
+		            <input name="description" id="description" required>
 		            <input type="hidden" name="status" value="R" />
 		            <button class="btn btn-outline-danger" type="submit">SEND MAil</button>
 		         	</form>

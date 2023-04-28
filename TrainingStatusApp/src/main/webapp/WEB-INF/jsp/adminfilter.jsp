@@ -66,7 +66,7 @@ font-weight: 700;
   <table class="table table-hover">
   <tr>
  <td><b>Approver Name:</b></td>
-               <td><input list="apName" name="approver" placeholder="Approver Name ">
+               <td><input list="apName" name="approver" placeholder="Approver Name " required>
                <datalist id="apName">
  <%
 				try{
