@@ -7,5 +7,7 @@ public interface EmployeeService {
 
 	String getEmployeeNameByEmployeeId(String employeeId);
 	
-
+	String getEmployeeMailByEmployeeId(String mailId);
+	
+	String getEmployeeBatchByEmployeeId(String batch);
 }

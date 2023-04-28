@@ -261,7 +261,7 @@ nav li {
 						
 
 						<td class="emailId"><b>Email ID</b><span class="text-dark">*</span></td>
-						<td><input name="mailId" id="maillName"
+						<td><input name="mailId" id="mailId"
 							placeholder="mail Name" required></td>
 					</tr>
 
@@ -272,23 +272,9 @@ nav li {
 							placeholder="Employee Name" required></td>
 						<br>
 						<td class="batch"><b>Batch</b><span class="text-dark">*</span></td>
-						<td style="padding-left: 30px"><select class="sel"
-							name="batch" required>
-								<option value="" selected="selected">Select Batch</option>
-								<option>January</option>
-								<option>February</option>
-								<option>March</option>
-								<option>April</option>
-								<option>May</option>
-								<option>June</option>
-								<option>July</option>
-								<option>August</option>
-								<option>September</option>
-								<option>October</option>
-								<option>November</option>
-								<option>December</option>
-
-						</select></td>
+						<td style="padding-left: 30px">
+						<input name="batch" id="batch"
+							placeholder="Batch" required></td>
 				</table>
 				<br>
 				<div align="left">
@@ -297,7 +283,7 @@ nav li {
 				<table style="width: 50%;" class="table table-hover">
 					<tr>
 						<td><b>Training Date</b><span class="text-dark">*</span></td>
-						<td><input type="Date" name="trainDate" value="" required /></td>
+						<td><input type="Date" name="trainDate" id="trdate" value="" required /></td>
 						<td><b>Start date</b><span class="text-dark">*</span></td>
 						<td><input type="Date" name="srDate" value="" required />
 						<td>
@@ -391,7 +377,25 @@ nav li {
 	</form:form>
 
 </body>
+<script type="text/javascript">
+	$('#employeeId').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("employeeId");
 
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("batch").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-batch?employeeId=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("batch").value = data;
+		});
+	});
+</script>
 <script type="text/javascript">
 	$('#courseId').change(function() {
 		console.log("Inside");
@@ -430,6 +434,45 @@ nav li {
 		});
 	});
 </script>
+<script type="text/javascript">
+	$('#employeeId').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("employeeId");
+
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("mailId").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-mail?employeeId=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("mailId").value = data;
+		});
+	});
+</script>
+<script type="text/javascript">
+	$('#employeeId').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("employeeId");
+
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("batch").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-batch?employeeId=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("batch").value = data;
+		});
+	});
+</script>
+
 
 <script type="text/javascript">
 	function validateFileType() {

@@ -24,4 +24,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employeeDao.getEmployeeNameById(employeeId);
 	}
 
+	@Override
+	public String getEmployeeMailByEmployeeId(String mailId) {
+		return employeeDao.getEmployeeMailById(mailId);
+	}
+
+	@Override
+	public String getEmployeeBatchByEmployeeId(String batch) {
+		return employeeDao.getEmployeeBatchById(batch);
+	}
+
 }

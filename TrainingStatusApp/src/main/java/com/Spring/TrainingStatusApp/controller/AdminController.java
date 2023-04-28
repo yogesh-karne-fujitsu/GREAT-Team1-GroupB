@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +31,10 @@ public class AdminController {
 	
 	@Autowired
 	CourseService courseService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -108,6 +114,40 @@ public class AdminController {
 
 		return "traineerecords";
 	}
+
+    @RequestMapping(value = "/Mail", method = RequestMethod.GET)
+    public String mailPage() {
+    	System.out.println("in mail");
+    	return "sendMail";
+    	
+    }
+    @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+    public String submitmail(HttpServletRequest request) {
+    	
+    	System.out.println("in mail");
+    	String mailId = request.getParameter("mailId");
+		String description = request.getParameter("description");
+		String courseId = request.getParameter("courseId");
+		String courseName = request.getParameter("courseName");
+		String body="Dear Sir/Madam,\n \n Your Application for training has been Rejected\n\n\n"
+				+ "CourseId : " + courseId +"\n\n"
+				+ courseName + "\n \nApprover comments : " + description + "\n\n\n\n Note: This is a system generated response. DO NOT reply to this mail\r\n"
+						+ "\r\n"
+						+ "Regards,\r\n"
+						+ "\r\n"
+						+ "Training Status App";
+		
+		SimpleMailMessage message=new SimpleMailMessage();
+		message.setFrom ("space.walker0902@gmail.com");
+		message.setTo(mailId);
+		message.setText (body);
+		message.setSubject ("Training Status App");
+		
+		mailSender.send(message);
+		
+		return "message";
+    	
+    }
 	
 	
 	@RequestMapping(value = "/logoutToAdmin", method = RequestMethod.GET)

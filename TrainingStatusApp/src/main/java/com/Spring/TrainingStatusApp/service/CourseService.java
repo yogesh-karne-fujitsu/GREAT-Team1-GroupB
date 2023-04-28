@@ -6,6 +6,7 @@ public interface CourseService {
 	List<String> getAllCourseId();
 
 	String getCourseNameByCourseId(String courseId);
+
 	
 
 }

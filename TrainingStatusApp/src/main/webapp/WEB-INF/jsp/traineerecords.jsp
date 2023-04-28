@@ -90,7 +90,7 @@ tr, center5 { <
 	td7
 	>
 }
-
+html {zoom: 80%;} 
 body {
 	background-color: rgb(234, 232, 232);
 	padding: 3%;
@@ -103,6 +103,7 @@ body {
 }
 
 }
+
 body {
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -232,6 +233,9 @@ to {
 			<td style=" text-align:center"><label><b>SABA SCREENSHOT</b></label></td>
 			<td style=" text-align:center"><label><b>MAIL SCREENSHOT</b></label></td>
 			<td style=" text-align:center"><label><b>TEST SCREENSHOT</b></label></td>
+			<td style=" text-align:center"><label><b>APPROVE</b></label></td>
+			<td style=" text-align:center"><label><b>REJECT</b></label></td>
+			<td style=" text-align:center"><label><b>SEND MAil</b></label></td>
 				
 		</tr>
 
@@ -276,7 +280,19 @@ to {
 							name="status">APPROVE</button>
 					</td>
 					<td>
-						<button class="btn btn-outline-danger" value="R" name="status">REJECT</button>
+						<button class="btn btn-outline-danger" value="R" name="status" >REJECT</button>
+					</td>
+					
+					</form>
+					<td>
+					<form class="reject-form" action="sendMail" method="POST"target="_blank">
+		            <input type="hidden" name="mailId" value="${user.mailId}" />
+		            <input type="hidden" name="courseId" value="${user.courseId}" />
+		            <input type="hidden" name="courseName" value="${user.courseName}" />
+		            <input name="description" id="description">
+		            <input type="hidden" name="status" value="R" />
+		            <button class="btn btn-outline-danger" type="submit">SEND MAil</button>
+		         	</form>
 					</td>
 					<div class="modal">
 						<span class="close">&times;</span> <img class="modalImage"
@@ -299,7 +315,7 @@ document.querySelector(".close").addEventListener("click", () => {
    modalEle.style.display = "none";
 });
 </script>
-			</form>
+			
 		</c:forEach>
 
 	</table>
