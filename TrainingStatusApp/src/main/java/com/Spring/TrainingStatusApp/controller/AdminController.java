@@ -117,12 +117,12 @@ public class AdminController {
 		String description = req.getParameter("description");
 		String courseId = req.getParameter("courseId");
 		String courseName = req.getParameter("courseName");
-		String body="Dear Sir/Madam,\n \n Your Application for training has been Rejected\n\n\n"
+		String employeeName = req.getParameter("empname");
+		String body="Dear "+ employeeName+",\n \n Your Application for training has been Rejected\n\n\n"
 				+ "CourseId : " + courseId +"\n\n"
-				+ courseName + "\n \nApprover comments : " + description + "\n\n\n\n Note: This is a system generated response. DO NOT reply to this mail\r\n"
+				+ courseName + "\n \nApprover comments : " + description + "\n\n\n\nNote: This is a system generated response. DO NOT reply to this mail\r\n"
 						+ "\r\n"
 						+ "Regards,\r\n"
-						+ "\r\n"
 						+ "Training Status App";
 		
 		SimpleMailMessage message=new SimpleMailMessage();

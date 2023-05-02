@@ -1,6 +1,13 @@
 package com.Spring.TrainingStatusApp.controller.bean;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class Trainee {
+	@NotNull
+	@Pattern(regexp = "[0-9]*")
+	@Size(min=5,max=5,message="enter correct emp id")
 	private String empId;
 	private String mailId;
 	private String empName;
@@ -14,8 +21,11 @@ public class Trainee {
 	private String sImg;
 	private String sbImg;
 	private String tsImg;
+	@Pattern(regexp = "[0-9]*")
+	@Size(min=2,max=2,message="enter correct test score")
 	private String testScore;
 	private String status;
+	
 	
 	public String getEmpId() {
 		return empId;
