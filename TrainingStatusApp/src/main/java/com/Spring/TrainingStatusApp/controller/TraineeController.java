@@ -1,4 +1,4 @@
-package com.spring.TrainingStatusApp.controller;
+package com.Spring.TrainingStatusApp.controller;
 
 import java.io.IOException;
 import java.util.List;

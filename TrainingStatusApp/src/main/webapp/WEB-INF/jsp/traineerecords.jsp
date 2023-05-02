@@ -238,7 +238,8 @@ to {
 			<td style=" text-align:center"><label><b>SEND MAil</b></label></td>
 				
 		</tr>
-
+		<h3 style="color: red">${errorMsg}</h3>
+		<h5 style="color: red">${sentMail}</h5>
 		<c:forEach items="${usersList}" var="user">
 			<form method="post" action="approve">
 
@@ -280,20 +281,17 @@ to {
 							name="status">APPROVE</button>
 					</td>
 					<td>
-						<button class="btn btn-outline-danger" value="R" name="status" >REJECT</button>
+					<input type="hidden" name="mailId" value="${user.mailId}" />
+		            <input type="hidden" name="courseId" value="${user.courseId}" />
+		            <input type="hidden" name="courseName" value="${user.courseName}" />
+					<button class="btn btn-outline-danger" value="R" name="status" >REJECT</button>
+					</td>
+					<td>
+					<input size="10" name="description" id="description" style="height:34px" placeholder="Reject Reason" required>
 					</td>
 					
 					</form>
-					<td>
-					<form class="reject-form" action="sendMail" method="POST"target="_blank">
-		            <input type="hidden" name="mailId" value="${user.mailId}" />
-		            <input type="hidden" name="courseId" value="${user.courseId}" />
-		            <input type="hidden" name="courseName" value="${user.courseName}" />
-		            <input name="description" id="description">
-		            <input type="hidden" name="status" value="R" />
-		            <button class="btn btn-outline-danger" type="submit">SEND MAil</button>
-		         	</form>
-					</td>
+					
 					<div class="modal">
 						<span class="close">&times;</span> <img class="modalImage"
 							id="img01">
