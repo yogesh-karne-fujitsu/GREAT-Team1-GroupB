@@ -10,16 +10,16 @@ font-family : san-serif;
 }
 
 body{
-background: url(https://visualpharm.com/assets/40/Fujitsu-595b40b75ba036ed117d95c7.svg),url(https://cdn.dribbble.com/users/3419046/screenshots/15428526/fujitsu-800_600.gif);
+background: url(https://wi.wallpapertip.com/wsimgs/246-2467634_fujitsu-wallpaper.jpg);
                background-color: rgb(234, 232, 232); 
-               background-size: 145% 145%, 20% 30%;
-               background-position:  left top,left top;
+               background-size: 100% 100%;
+               background-position:  left top;
                background-repeat: no-repeat;
-                padding: 10%;        
+                padding: 0%;        
 }
 
 body .hero{
-height : 100%;
+height : 80%;
 width : 100%;
 background-position : center;
 background-size : cover;
