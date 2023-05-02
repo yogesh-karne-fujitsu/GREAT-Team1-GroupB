@@ -249,13 +249,10 @@ nav li {
 				<table style="width: 50%;" table table-hover";align="left">
 					<tr>
 						<td class="empid"><label><b>Employee Id </b><span class="text-dark">*</span></label></td>
-						<td><input id="employeeId" list="employeeDataList" name="empId" 
-						placeholder="employee Id" required>
-							<datalist id="employeeDataList">
-
-							<c:forEach items="${employeeIdList}" var="employeeId">
-							</c:forEach>
-
+						<td><input id="employeeId" list="employeeDataList" name="empId" placeholder="employee Id" required><form:errors path="empId" cssClass="error" />
+						<datalist id="employeeDataList">
+						<c:forEach items="${employeeIdList}" var="employeeId">
+						</c:forEach>
 						</datalist> </td>
 						
 
@@ -319,7 +316,7 @@ nav li {
 					<tr>
 						<td><b>Test-Score Screenshot</b></td>
 						<td><input type="file" id="fileName" name="testScrn"
-							accept=".jpg,.jpeg,.png" onchange="validateFileType()" /></td>
+							accept=".jpg,.jpeg,.png" onchange="validateFileType()" required/></td>
 						<td><b>Test Score</b></td>
 						<td><input type="text" name="testScore" value=""
 							placeholder="Score" /> <form:errors path="testScore"

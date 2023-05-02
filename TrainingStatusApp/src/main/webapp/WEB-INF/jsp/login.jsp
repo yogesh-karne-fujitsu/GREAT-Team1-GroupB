@@ -118,7 +118,6 @@ color:red;
 </head>
 
 <body>
- 
 <div class = "hero">
 <div class = "form-box">    
       <div class = "button-box">

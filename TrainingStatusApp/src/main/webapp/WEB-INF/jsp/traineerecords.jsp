@@ -17,6 +17,8 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	
+
 <meta charset="ISO-8859-1">
 
 <title>Trainee Records</title>
@@ -235,7 +237,7 @@ to {
 			<td style=" text-align:center"><label><b>TEST SCREENSHOT</b></label></td>
 			<td style=" text-align:center"><label><b>APPROVE</b></label></td>
 			<td style=" text-align:center"><label><b>REJECT</b></label></td>
-			<td style=" text-align:center"><label><b>SEND MAil</b></label></td>
+			<td style=" text-align:center"><label><b>        </b></label></td>
 				
 		</tr>
 		<h3 style="color: red">${errorMsg}</h3>
@@ -277,20 +279,33 @@ to {
 						style="width: 100%; max-width: 300px"></td>
 						
 					<td>
-						<button type="submit" class="btn btn-outline-success" value="A"
-							name="status">APPROVE</button>
+					<button type="submit"  id="approveButton" class="btn btn-outline-success" value="A" name="status">APPROVE</button>
 					</td>
-					<td>
+					<td >
 					<input type="hidden" name="mailId" value="${user.mailId}" />
+					<input type="hidden" name="empname" value="${user.empName}" />
 		            <input type="hidden" name="courseId" value="${user.courseId}" />
 		            <input type="hidden" name="courseName" value="${user.courseName}" />
-					<button class="btn btn-outline-danger" value="R" name="status" >REJECT</button>
+					<button id="rejectButton" class="btn btn-outline-danger" value="R" name="status" >REJECT</button>
 					</td>
 					<td>
-					<input size="10" name="description" id="description" style="height:34px" placeholder="Reject Reason" required>
+					   <input size="10" name="description" id="description" style="height:34px" placeholder="Reject Reason" >
 					</td>
-					
+
 					</form>
+					<script>
+					   var approveButton = document.getElementById("approveButton");
+					   var rejectButton = document.getElementById("rejectButton");
+					   var descriptionInput = document.getElementById("description");
+					
+					   approveButton.addEventListener("click", function() {
+					      descriptionInput.removeAttribute("required");
+					   });
+					
+					   rejectButton.addEventListener("click", function() {
+					      descriptionInput.setAttribute("required", "required");
+					   });
+					</script>
 					
 					<div class="modal">
 						<span class="close">&times;</span> <img class="modalImage"
@@ -313,8 +328,9 @@ document.querySelector(".close").addEventListener("click", () => {
    modalEle.style.display = "none";
 });
 </script>
-			
+		
 		</c:forEach>
+		
 
 	</table>
 
